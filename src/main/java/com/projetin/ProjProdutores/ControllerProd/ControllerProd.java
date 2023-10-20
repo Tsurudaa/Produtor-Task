@@ -3,6 +3,7 @@ package com.projetin.ProjProdutores.ControllerProd;
 
 import com.projetin.ProjProdutores.ModelProd.Produtor;
 import com.projetin.ProjProdutores.ServiceProd.ServiceProdutores;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class ControllerProd {
     }
 
     @GetMapping("alterar/{Id}")
-    public String alterar(@PathVariable Long Id, Model model) {
+    public String alterar(@PathVariable Integer Id, Model model) {
         model.addAttribute("boasVindas", FORMULARIO_BOASVINDAS);
         Produtor produtor = service.buscarPorId(Id);
         model.addAttribute("produtor", produtor);
@@ -44,8 +45,8 @@ public class ControllerProd {
     }
 
     @PostMapping("remover")
-    public String remover(@RequestParam Long id) {
-        service.removerPorId(id);
+    public String remover(Produtor produtor, Model model) {
+        service.removerPorId(produtor);
         return "redirect:/lista";
     }
 }
