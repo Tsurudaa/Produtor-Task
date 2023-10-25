@@ -31,4 +31,8 @@ public class ServiceProdutores {
     public void removerPorId(Produtor produtor) {
             produtorRepository.delete(produtor);
         }
+    
+    public Produtor listarPorId(Integer id) {
+        return produtorRepository.findById(id).get();
+    }
 }
